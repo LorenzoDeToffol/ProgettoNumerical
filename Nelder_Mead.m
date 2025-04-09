@@ -1,12 +1,35 @@
 function[] = Nelder_Mead(n_iter, N_vertex, x0, rho, chi, gamma, sigma)
+%% Explaining the function inputs and outputs
+% Input:
+% - n_iter: scalar value that indicates the number of iteration of the model
+% - N_vertex: scalar value that indicates the number of vertices of our simplex
+% - x0: vector 1x2 of our starting points
+% - rho: parameter for the Reflection phase
+% - chi: parameter for the Expansione phase
+% - gamma: parameter for the Contraction phase
+% - sigma: parameter for the Shrinkage phase
+
+% Output:
+% - 
+% - 
+
 
 % Function to be used
 func = @(x) x+1;
 
 % Defining vertices of the Simplex
-vertex = zeros(N_vertex + 1, 2);
+vertex = randi([1, 10], N_vertex + 1, 2);
 vertex(1,:) = x0;
-%% ATTENZIONE: bisogna ordinare i punti!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+%% Tentativo ordinamento da testare
+% Computing the values of the function in the vertices
+values = func(vertex);
+
+% Save the indices of the sorted values
+[~, sortedIndices] = sort(values);
+
+% Sorted matrix of vertices
+vertex = vertex(sortedIndices, :);
 
 % Iterating method
 for i = 1:n_iter
